@@ -1,4 +1,4 @@
-use clap::{Args, Parser, Subcommand};
+use clap::{ArgEnum, Args, Parser, Subcommand};
 
 #[derive(Parser)]
 #[clap(author, version, about)]
@@ -51,12 +51,24 @@ struct Create {
     #[clap(parse(from_os_str))]
     input_directory: std::path::PathBuf,
     /// Archive type
-    #[clap(value_name = "TYPE")]
-    archive_type: String,
+    #[clap(arg_enum, value_name = "TYPE")]
+    archive_type: ArchiveType,
     #[clap(short)]
     compress: Option<bool>,
     #[clap(short)]
-    share: Option<usize>,
+    share: Option<bool>,
+}
+
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, ArgEnum)]
+enum ArchiveType {
+    Tes3,
+    Tes4,
+    Tes5,
+    Fo3,
+    Fnv,
+    Sse,
+    Fo4,
+    Fo4dds,
 }
 
 fn main() {
