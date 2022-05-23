@@ -53,9 +53,11 @@ struct Create {
     /// Archive type
     #[clap(arg_enum, value_name = "TYPE")]
     archive_type: ArchiveType,
-    #[clap(short)]
+    #[clap(short, long)]
+    /// Compress archive
     compress: Option<bool>,
-    #[clap(short)]
+    /// Deduplicate files in the archive
+    #[clap(short, long)]
     share: Option<bool>,
 }
 
